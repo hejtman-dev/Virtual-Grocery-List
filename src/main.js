@@ -3,18 +3,17 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebas
 import { getDatabase, ref, set, get, onValue } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
 import { firebaseConfig } from './config.js';
 
-// THIS CONTENT IS IN ./config.js: 
 // const firebaseConfig = {
-//   apiKey: "",
-//   authDomain: "",
-//   projectId: "",
-//   storageBucket: "",
-//   messagingSenderId: "",
-//   appId: "",
-//   databaseURL: "",
-//   measurementId: ""
-// };
-
+  //   apiKey: "AIzaSyDbCBps9zR1H-bdJJe18hXD-KMi056GKDY",
+  //   authDomain: "kosik-neo.firebaseapp.com",
+  //   projectId: "kosik-neo",
+  //   storageBucket: "kosik-neo.firebasestorage.app",
+  //   messagingSenderId: "293838446545",
+  //   appId: "1:293838446545:web:157728e14b564ced6e4af0",
+  //   databaseURL: "https://kosik-neo-default-rtdb.europe-west1.firebasedatabase.app",
+  //   measurementId: "G-7542Z2TVPZ"
+  // };
+  
 const firebaseApp = initializeApp(firebaseConfig);
 const db = getDatabase(firebaseApp);
 
@@ -170,6 +169,7 @@ class ShoppingListApp {
       item.status = 'completed';
       item.completedAt = new Date().toISOString();
       await this.saveDataToFirebase(this.items);
+      this.showToast(`${item.name} odebrán z košíku`, 'success');
     }
   }
 
@@ -179,12 +179,14 @@ class ShoppingListApp {
       item.status = 'active';
       item.completedAt = null;
       await this.saveDataToFirebase(this.items);
+      this.showToast(`${item.name} obnoven`, 'success');
     }
   }
 
   async deleteItem(id) {
     this.items = this.items.filter(i => i.id !== id);
     await this.saveDataToFirebase(this.items);
+    this.showToast('Smazano z historie', 'danger');
   }
 
   async deleteShopItems(shopKey) {
@@ -198,6 +200,7 @@ class ShoppingListApp {
       });
       await this.saveDataToFirebase(this.items);
       this.openedAccordions.delete(shopKey);
+      this.showToast('Vše odebráno ze sekce', 'success');
     });
   }
 
@@ -252,10 +255,14 @@ class ShoppingListApp {
           <ion-list lines="full">
             ${shopItems.map(item => `
               <ion-item-sliding>
-                <ion-item>
-                  <ion-label style="${item.priority === 'high' ? 'font-weight: bold; color: var(--ion-color-danger);' : ''}">
-                    ${item.name}
-                    <p>Priorita: ${PRIORITIES[item.priority]}</p>
+                <ion-item class="priority-${item.priority}">
+                  <ion-label>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                      <span>${item.name}</span>
+                      <ion-note color="${item.priority === 'high' ? 'danger' : 'medium'}" style="font-size: 0.8rem;">
+                        ${PRIORITIES[item.priority]}
+                      </ion-note>
+                    </div>
                   </ion-label>
                 </ion-item>
                 <ion-item-options side="end">
@@ -336,7 +343,34 @@ class ShoppingListApp {
       await this.showConfirmAlert('Smazat historii', `Opravdu smazat historii pro ${LOCATIONS[this.currentLocation]}?`, async () => {
         this.items = this.items.filter(i => !(i.location === this.currentLocation && i.status === 'completed'));
         await this.saveDataToFirebase(this.items);
+        this.showToast('Historie smazána', 'danger');
       });
+    });
+
+    document.getElementById('btn-delete-all')?.addEventListener('click', async () => {
+      // Najdeme položky k odstranění (jen aktivní v aktuální lokaci)
+      const itemsToDelete = this.items.filter(i => i.location === this.currentLocation && i.status === 'active');
+      
+      if (itemsToDelete.length === 0) {
+        this.showToast('Košík je už prázdný', 'warning');
+        return;
+      }
+
+      // Použijeme tvůj připravený alert v HTML nebo zavoláme confirm
+      await this.showConfirmAlert(
+        'Smazat vše', 
+        `Opravdu chcete hromadně přesunout všechny položky z lokace ${LOCATIONS[this.currentLocation]} do historie?`, 
+        async () => {
+          this.items.forEach(item => {
+            if (item.location === this.currentLocation && item.status === 'active') {
+              item.status = 'completed';
+              item.completedAt = new Date().toISOString();
+            }
+          });
+          await this.saveDataToFirebase(this.items);
+          this.showToast('Vše přesunuto do historie');
+        }
+      );
     });
 
     // Sledování otevřených accordionů

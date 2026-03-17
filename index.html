@@ -7,7 +7,8 @@
     <script nomodule src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css"/>
     <link rel="stylesheet" href="./src/style.css">
-    <title>kosik</title>
+    <link rel="shortcut icon" href="./img/logo.png" type="image/x-icon">
+    <title>Košík</title>
   </head>
   <body>
     <ion-tabs>
@@ -16,7 +17,9 @@
         <div id="home-page" class="ion-page">
           <ion-header>
             <ion-toolbar>
-              <ion-buttons slot="start">
+              <ion-title>Nákupní košík</ion-title>
+
+              <ion-buttons slot="end">
                 <ion-item lines="none" class="location-selector">
                   <ion-icon name="location-outline" slot="start"></ion-icon>
                   <ion-select id="location-select-home" class="global-location-select" interface="popover" placeholder="Město">
@@ -26,14 +29,13 @@
                   </ion-select>
                 </ion-item>
               </ion-buttons>
-              
-              <ion-title>Nákupní košík</ion-title>
+
             </ion-toolbar>
           </ion-header>
           <ion-content>
             <div class="example-content">
               <ion-card class="add-card">
-                <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" />
+                <img alt="Silhouette of mountains" src="./img/bee.png" />
                 <ion-card-header>
                   <ion-card-title>Přidat věc</ion-card-title>
                 </ion-card-header>
@@ -123,7 +125,7 @@
             </ion-toolbar>
           </ion-header>
           <ion-content>
-
+            <div>
               <ion-card class="cart-card">
                 <ion-card-header>
                   <div class="cart-header">
@@ -150,6 +152,7 @@
                   </div>
                 </ion-card-content>
               </ion-card>
+              </div>
           </ion-content>
         </div>
 

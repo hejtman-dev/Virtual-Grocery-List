@@ -1,0 +1,251 @@
+:root {
+    /* Barvy podle nahraného obrázku */
+    --color_gray : #393E41;
+    --color_light_brown : #4d5458;
+    --color_dark_brown : #393E41;
+    --color_true_brown : #2a2e30;
+    --color_pretty_brown : #FFCC00;
+    --color_brown : #FFDA47;
+    --color_font : #ffffff;
+
+    /* --- LADĚNÍ IONIC BAREV --- */
+
+    /* SUCCESS - Kontrastní tmavá pro žlutý podklad nebo sytá žlutá */
+    --ion-color-success: #FFCC00;
+    --ion-color-success-rgb: 255,204,0;
+    --ion-color-success-contrast: #000000;
+    --ion-color-success-shade: #e0b400;
+    --ion-color-success-tint: #ffd11a;
+    --color-checked : var(--color_dark_brown);
+    --border-color: var(--color_dark_brown);
+
+    /* DANGER - Zachování funkční červené, aby ladila k tmavé šedi */
+    --ion-color-danger: #e63946;
+    --ion-color-danger-rgb: 230,57,70;
+    --ion-color-danger-contrast: #ffffff;
+    --ion-color-danger-shade: #ca323e;
+    --ion-color-danger-tint: #e94d59;
+
+    /* WARNING - Světlejší žlutá z palety */
+    --ion-color-warning: #FFE270;
+    --ion-color-warning-rgb: 255,226,112;
+    --ion-color-warning-contrast: #000000;
+    --ion-color-warning-shade: #e0c763;
+    --ion-color-warning-tint: #ffe57e;
+
+    /* PRIMARY - Hlavní žlutá FFCC00 */
+    --ion-color-primary: #FFCC00;
+    --ion-color-primary-contrast: #000000;
+    --ion-color-primary-shade: #e0b400;
+    --ion-color-primary-tint: #ffd11a;
+
+    /* BACKGROUNDS */
+    --ion-background-color: #FFFBEB;
+    --ion-item-background: #ffffff;
+}
+
+/* Hlavní layout */
+ion-content {
+    --background: #FFFBEB;
+}
+
+/* Centrování obsahu v kartách */
+ion-content > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 16px;
+    min-height: 100%;
+}
+
+/* Header a Toolbar */
+ion-header {
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+ion-toolbar {
+    --background: #393E41;
+    --color: #FFCC00;
+    --border-style: none;
+    padding-top: env(safe-area-inset-top);
+}
+
+ion-title {
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-size: 1.1rem;
+    color: #FFCC00;
+}
+
+/* Stylování Location Selectoru v toolbaru */
+.location-selector {
+    --background: transparent;
+    --color: #ffffff;
+    font-size: 0.9rem;
+}
+
+.global-location-select {
+    --placeholder-color: #FFDA47;
+    --placeholder-opacity: 1;
+}
+
+/* Karty (Cards) */
+ion-card {
+    max-width: 500px;
+    width: 100%;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(57, 62, 65, 0.1);
+    margin-bottom: 20px;
+    border: 1px solid rgba(255, 204, 0, 0.2);
+    background: white;
+}
+
+ion-card-title {
+    color: #393E41;
+    font-weight: 700;
+}
+
+/* Formuláře a vstupy */
+ion-item {
+    --border-radius: 8px;
+    --padding-start: 8px;
+    margin-bottom: 8px;
+}
+
+ion-input, ion-select {
+    font-weight: 500;
+}
+
+/* Tlačítka */
+.btn-container {
+    padding: 16px;
+}
+
+ion-button {
+    --border-radius: 12px;
+    --color: #000000;
+    font-weight: 700;
+    height: 48px;
+    margin-top: 10px;
+}
+
+/* Specifické úpravy pro Seznam (Cart) */
+.cart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.badge-total {
+    --padding-top: 8px;
+    --padding-bottom: 8px;
+    --padding-start: 12px;
+    --padding-end: 12px;
+    border-radius: 10%;
+    font-size: 1rem;
+    background: #FFCC00;
+    color: #000000;
+}
+
+/* Accordion (Položky v košíku) */
+ion-accordion-group {
+    background: transparent;
+}
+
+ion-accordion {
+    margin-bottom: 8px;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #FFE270;
+}
+
+/* Spodní navigace (Tabs) */
+ion-tab-bar {
+    --background: #393E41;
+    --border: none;
+    height: 65px;
+    border-radius: 20px 20px 0 0;
+}
+
+ion-tab-button {
+    --color: #949494;
+    --color-selected: #FFCC00;
+}
+
+ion-tab-button ion-icon {
+    font-size: 24px;
+}
+
+/* Animace pro karty */
+ion-card {
+    animation: fadeIn 0.5s ease-out;
+}
+
+.alert-delete-all.alert-button-danger {
+    color: var(--ion-color-danger) !important;
+    font-weight: bold;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- PRIORITNÍ ŠTÍTKY (Badge/Item styly) --- */
+
+/* Vysoká priorita (!!!) */
+.priority-high {
+    --background: #fff5f5;
+    border-left: 5px solid #e63946 !important;
+}
+.priority-high ion-label {
+    font-weight: 800 !important;
+    color: #e63946 !important;
+}
+
+/* Střední priorita (!!) */
+.priority-mid {
+    border-left: 5px solid #FFCC00 !important;
+    --background: #fffdf5;
+}
+
+/* Nízká priorita (!) */
+.priority-low {
+    border-left: 5px solid #393E41 !important;
+    --background: #fcfcfc;
+}
+
+/* --- ÚPRAVA OSTATNÍCH PRVKŮ --- */
+
+/* Vylepšení Accordion Headeru (Obchody) */
+ion-accordion ion-item[slot="header"] {
+    --background: #393E41;
+    --color: #FFCC00;
+    margin-bottom: 0;
+    border-radius: 0;
+}
+
+/* Ikony v seznamu */
+ion-item ion-icon {
+    color: #393E41;
+}
+
+/* Floating Input stylování */
+ion-input.custom-input {
+    --highlight-color-focused: #FFCC00;
+}
+
+/* Styl pro "Vyřízeno" v historii */
+.history-item {
+    --opacity: 0.5;
+    filter: grayscale(1);
+}
+
+/* 2. Hlavní úprava bílé karty s textem */
+ion-item-sliding ion-item {
+  --background: #ffffff;
+  --inner-padding-end: 16px;
+  --border-radius: 0;
+  margin: 0;
+}
