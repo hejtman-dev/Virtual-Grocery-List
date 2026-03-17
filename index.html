@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js"></script>
+    <script nomodule src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@ionic/core/css/ionic.bundle.css"/>
+    <link rel="stylesheet" href="./src/style.css">
+    <title>kosik</title>
+  </head>
+  <body>
+    <ion-tabs>
+      <!-- TAB 1: PŘIDAT VĚCI -->
+      <ion-tab tab="home">
+        <div id="home-page" class="ion-page">
+          <ion-header>
+            <ion-toolbar>
+              <ion-buttons slot="start">
+                <ion-item lines="none" class="location-selector">
+                  <ion-icon name="location-outline" slot="start"></ion-icon>
+                  <ion-select id="location-select-home" class="global-location-select" interface="popover" placeholder="Město">
+                    <ion-select-option value="olomouc">Olomouc</ion-select-option>
+                    <ion-select-option value="ostrava">Ostrava</ion-select-option>
+                    <ion-select-option value="strakonice">Strakonice</ion-select-option>
+                  </ion-select>
+                </ion-item>
+              </ion-buttons>
+              
+              <ion-title>Nákupní košík</ion-title>
+            </ion-toolbar>
+          </ion-header>
+          <ion-content>
+            <div class="example-content">
+              <ion-card class="add-card">
+                <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" />
+                <ion-card-header>
+                  <ion-card-title>Přidat věc</ion-card-title>
+                </ion-card-header>
+
+                <ion-card-content>
+                  <ion-list class="add-form">
+                    <ion-item>
+                      <ion-input 
+                        id="input-item-name" 
+                        class="input-name"
+                        label-placement="floating" 
+                        label="Název"
+                        placeholder="Zadejte název..."
+                      ></ion-input>
+                    </ion-item>
+                    <ion-item>
+                      <ion-select 
+                        id="select-shop" 
+                        class="select-shop"
+                        label="Do jakého obchodu?" 
+                        aria-label="Shop" 
+                        placeholder="Do jakého obchodu" 
+                        value="generic"
+                      >
+                        <ion-select-option value="generic">Ostatní</ion-select-option>
+                        <ion-select-option value="albert">Albert</ion-select-option>
+                        <ion-select-option value="globus">Globus</ion-select-option>
+                        <ion-select-option value="kaufland">Kaufland</ion-select-option>
+                        <ion-select-option value="lidl">Lidl</ion-select-option>
+                        <ion-select-option value="penny">Penny</ion-select-option>
+                        <ion-select-option value="oc">Obchodní centrum</ion-select-option>
+                        <ion-select-option value="drogerie">Drogérie</ion-select-option>
+                        <ion-select-option value="lekarna">Lékárna</ion-select-option>
+                      </ion-select>
+                    </ion-item>
+
+                    <ion-item>
+                      <ion-select 
+                        id="select-priority" 
+                        class="select-priority"
+                        label="Zvolte prioritu" 
+                        aria-label="Priority" 
+                        placeholder="Zvolte prioritu" 
+                        value="neutral"
+                      >
+                        <ion-select-option value="neutral">-</ion-select-option>
+                        <ion-select-option value="low">!</ion-select-option>
+                        <ion-select-option value="mid">!!</ion-select-option>
+                        <ion-select-option value="high">!!!</ion-select-option>
+                      </ion-select>
+                    </ion-item>
+                    
+                    <div class="btn-container">
+                      <ion-button 
+                        id="btn-add-item" 
+                        class="btn-add"
+                        expand="block"
+                        color="success"
+                      >Přidat</ion-button>
+                    </div>
+                  </ion-list>
+
+                </ion-card-content>
+              </ion-card>
+            </div>
+          </ion-content>
+        </div>
+      </ion-tab>
+
+      <!-- TAB 2: KOŠÍK / NÁKUPNÍ SEZNAM -->
+      <ion-tab tab="cart">
+        <div id="cart-page" class="ion-page">
+          <ion-header>
+            <ion-toolbar>
+              <ion-buttons slot="start">
+                <ion-item lines="none" class="location-selector">
+                  <ion-icon name="location-outline" slot="start"></ion-icon>
+                  <ion-select id="location-select-cart" class="global-location-select" interface="popover" placeholder="Město">
+                    <ion-select-option value="olomouc">Olomouc</ion-select-option>
+                    <ion-select-option value="ostrava">Ostrava</ion-select-option>
+                    <ion-select-option value="strakonice">Strakonice</ion-select-option>
+                  </ion-select>
+                </ion-item>
+              </ion-buttons>
+              
+              <ion-title>Nákupní košík</ion-title>
+            </ion-toolbar>
+          </ion-header>
+          <ion-content>
+
+              <ion-card class="cart-card">
+                <ion-card-header>
+                  <div class="cart-header">
+                    <div class="cart-title-section">
+                      <ion-card-title class="cart-title">Košík</ion-card-title>
+                      <ion-card-subtitle class="cart-subtitle">Co a kde nakoupit</ion-card-subtitle>
+                    </div>
+                    <ion-badge id="badge-cart-total" class="badge-total">0</ion-badge>
+                  </div>
+                </ion-card-header>
+                <ion-card-content>
+
+                  <ion-accordion-group id="accordion-cart" class="accordion-cart">
+                    <!-- Dynamicky vyplněno JavaScriptem -->
+                  </ion-accordion-group>
+
+                  <div class="btn-container">
+                    <ion-button 
+                      id="btn-delete-all" 
+                      class="btn-delete-all"
+                      expand="block"
+                      color="danger"
+                    >Vymazat vše</ion-button>
+                  </div>
+                </ion-card-content>
+              </ion-card>
+          </ion-content>
+        </div>
+
+        <ion-alert 
+          id="alert-delete-all" 
+          class="alert-delete-all"
+          header="Potvrzení" 
+          message="Opravdu chcete vymazat všechny položky v aktuální lokaci?"
+          buttons='[{"text":"Zrušit","role":"cancel"},{"text":"Vymazat","role":"confirm","cssClass":"alert-button-danger"}]'
+        >
+        </ion-alert>
+
+      </ion-tab>
+
+      <!-- TAB 3: HISTORIE -->
+      <ion-tab tab="history">
+        <div id="history-page" class="ion-page">
+          <ion-header>
+            <ion-toolbar>
+              <ion-buttons slot="start">
+                <ion-item lines="none" class="location-selector">
+                  <ion-icon name="location-outline" slot="start"></ion-icon>
+                  <ion-select id="location-select-history" class="global-location-select" interface="popover" placeholder="Město">
+                    <ion-select-option value="olomouc">Olomouc</ion-select-option>
+                    <ion-select-option value="ostrava">Ostrava</ion-select-option>
+                    <ion-select-option value="strakonice">Strakonice</ion-select-option>
+                  </ion-select>
+                </ion-item>
+              </ion-buttons>
+              
+              <ion-title>Nákupní košík</ion-title>
+            </ion-toolbar>
+          </ion-header>
+          <ion-content>
+            <div class="example-content">
+              <ion-card class="history-card">
+                <ion-card-header>
+                  <ion-card-title class="history-title">Historie košíku</ion-card-title>
+                </ion-card-header>
+
+                <ion-card-content>
+                  <ion-accordion-group id="accordion-history" class="accordion-history">
+                    <!-- Dynamicky vyplněno JavaScriptem -->
+                  </ion-accordion-group>
+                </ion-card-content>
+                  <div class="btn-container">
+                    <ion-button 
+                      id="btn-delete-history" 
+                      class="btn-delete-history"
+                      expand="block"
+                      color="danger"
+                    >Vymazat Historii</ion-button>
+                  </div>
+              </ion-card>
+            </div>
+          </ion-content>
+        </div>
+      </ion-tab>
+
+      <!-- BOTTOM NAVIGATION -->
+      <ion-tab-bar slot="bottom" class="tab-bar">
+        <ion-tab-button tab="home" class="tab-button-home">
+          <ion-icon name="add"></ion-icon>
+          Přidat
+        </ion-tab-button>
+        <ion-tab-button tab="cart" class="tab-button-cart">
+          <ion-icon name="cart"></ion-icon>
+          Seznam
+        </ion-tab-button>
+        <ion-tab-button tab="history" class="tab-button-history">
+          <ion-icon name="time"></ion-icon>
+          Historie
+        </ion-tab-button>
+      </ion-tab-bar>
+    </ion-tabs>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
