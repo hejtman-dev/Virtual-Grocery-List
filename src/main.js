@@ -4,14 +4,14 @@ import { getDatabase, ref, set, get, onValue } from "https://www.gstatic.com/fir
 import { firebaseConfig } from './config.js';
 
 // const firebaseConfig = {
-  //   apiKey: "AIzaSyDbCBps9zR1H-bdJJe18hXD-KMi056GKDY",
-  //   authDomain: "kosik-neo.firebaseapp.com",
-  //   projectId: "kosik-neo",
-  //   storageBucket: "kosik-neo.firebasestorage.app",
-  //   messagingSenderId: "293838446545",
-  //   appId: "1:293838446545:web:157728e14b564ced6e4af0",
-  //   databaseURL: "https://kosik-neo-default-rtdb.europe-west1.firebasedatabase.app",
-  //   measurementId: "G-7542Z2TVPZ"
+  //   apiKey: "",
+  //   authDomain: "",
+  //   projectId: "",
+  //   storageBucket: "",
+  //   messagingSenderId: "",
+  //   appId: "",
+  //   databaseURL: "",
+  //   measurementId: ""
   // };
   
 const firebaseApp = initializeApp(firebaseConfig);
